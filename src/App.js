@@ -1,25 +1,46 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Button from './Components/button';
+
+
 
 class App extends Component {
+
+  state = {
+    celsius: '',
+    farhenheit: '',
+  }
+
+  celsiusInput = (event) => {
+    console.log(this.state.celsius)
+    this.setState({
+      celsius: event.target.value
+    }) 
+  }
+    
+  convertToFarhenheit = () => {
+    console.log(this.state.farhenheit)
+    this.setState({
+      farhenheit: parseInt(((this.state.celsius) * 9 / 5) + 32)
+    })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div style={{ alignContent: 'center', textAlign: 'center' }} >
+        <h1 style={{ textAlign: 'center' }} >Temp Conversion</h1>
+        <div>
+          <h3>Degrees in Celcius</h3>
+          <input onChange={this.celsiusInput} />
+          <h3>Degrees in Farhenheit</h3>
+
+          <div>
+            {this.state.farhenheit} <br />
+            <Button onClick={this.convertToFarhenheit} />
+
+          </div>
+
+        </div>
       </div>
     );
   }
